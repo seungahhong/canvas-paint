@@ -1,0 +1,16 @@
+export const SHAPE_TYPE = {
+  NONE: 'NONE',
+  FILLTEXT: 'FILLTEXT',
+  STROKETEXT: 'STROKETEXT',
+  RECT: 'RECT',
+  TRIANGLE: 'TRIANGLE',
+  CIRCLE: 'CIRCLE',
+};
+
+export const GLOBAL_MENU_TYPE = {
+  SHAPE: {
+    TYPE: 'SHAPE',
+    OUTLINE: 'OUTLINE',
+    COLOR: 'COLOR',
+  },
+};
