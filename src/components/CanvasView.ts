@@ -1,10 +1,12 @@
 import React from 'react';
 import { SHAPE_TYPE } from '../constants';
+import { drawLine } from '../helpers/draw/drawLine';
 import { drawRect, drawTriangle, drawCircle } from '../helpers/draw/drawShape';
 import { drawFillText, drawStrokeText } from '../helpers/draw/drawText';
 
 class CanvasView {
   canvas: HTMLCanvasElement;
+
   ctx: CanvasRenderingContext2D | null;
   scale: number;
 
@@ -88,6 +90,14 @@ class CanvasView {
               const { x1, y1, x2, y2, props } = data;
               if (this.ctx) {
                 drawCircle(this.ctx, x1, y1, x2, y2, this.scale, props);
+              }
+            }
+            break;
+          case SHAPE_TYPE.LINE:
+            {
+              const { x1, y1, x2, y2, props } = data;
+              if (this.ctx) {
+                drawLine(this.ctx, x1, y1, x2, y2, this.scale, props);
               }
             }
             break;

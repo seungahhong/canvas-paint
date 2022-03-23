@@ -8,4 +8,10 @@ export interface Property {
   type: string;
   outline: boolean;
   color: string;
+
+  line: {
+    width: number;
+    cap: CanvasLineCap;
+    join: CanvasLineJoin;
+  };
 }

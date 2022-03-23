@@ -83,7 +83,7 @@ export const drawCircle = (
   ctx.arc(
     cx1 + (cx2 - cx1) / 2,
     cy1 + (cy2 - cy1) / 2,
-    (cy2 - cy1) / 2,
+    Math.abs(cy2 - cy1) / 2,
     0,
     Math.PI * 2,
     true,
