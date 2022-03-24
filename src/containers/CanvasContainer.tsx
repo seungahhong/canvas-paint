@@ -286,25 +286,29 @@ const CanvasContainer = () => {
           };
         }
 
-        const x1 =
-          index === 5
-            ? window.innerWidth / 2 - 300
-            : window.innerWidth / 2 + 100;
-        const y1 = (window.innerHeight - 150) / 2;
-        return {
-          ...data,
-          x1,
-          y1,
-          x2: x1 + 50,
-          y2: y1 + 50,
-          props: {
-            ...data.props,
-            color:
-              count === 0
-                ? `#${Math.floor(Math.random() * 16777215).toString(16)}`
-                : data.props.color,
-          },
-        };
+        if (index >= 5 && index <= 6) {
+          const x1 =
+            index === 5
+              ? window.innerWidth / 2 - 300
+              : window.innerWidth / 2 + 100;
+          const y1 = (window.innerHeight - 150) / 2;
+          return {
+            ...data,
+            x1,
+            y1,
+            x2: x1 + 50,
+            y2: y1 + 50,
+            props: {
+              ...data.props,
+              color:
+                count === 0
+                  ? `#${Math.floor(Math.random() * 16777215).toString(16)}`
+                  : data.props.color,
+            },
+          };
+        }
+
+        return data;
       }),
     }));
     requestAnimationFrame(animation);
