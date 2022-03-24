@@ -152,7 +152,7 @@ const MenuComponent = ({ meta, handleGlobalSetting }: Props) => {
           <InputLabel
             variant="standard"
             htmlFor="uncontrolled-native1"
-            style={{ width: '100px' }}
+            style={{ width: '150px' }}
           >
             Line Width
           </InputLabel>
@@ -178,7 +178,7 @@ const MenuComponent = ({ meta, handleGlobalSetting }: Props) => {
           <InputLabel
             variant="standard"
             htmlFor="uncontrolled-native2"
-            style={{ width: '100px' }}
+            style={{ width: '150px' }}
           >
             Line Cap
           </InputLabel>
@@ -190,7 +190,6 @@ const MenuComponent = ({ meta, handleGlobalSetting }: Props) => {
                 id: 'uncontrolled-native2',
               }}
               onChange={handleLineChange}
-              style={{ flex: 1 }}
             >
               <option value={LINE_CAP_TYPE.BUTT}>butt</option>
               <option value={LINE_CAP_TYPE.ROUND}>round</option>
@@ -202,7 +201,7 @@ const MenuComponent = ({ meta, handleGlobalSetting }: Props) => {
           <InputLabel
             variant="standard"
             htmlFor="uncontrolled-native3"
-            style={{ width: '100px' }}
+            style={{ width: '150px' }}
           >
             Line Join
           </InputLabel>
@@ -214,7 +213,6 @@ const MenuComponent = ({ meta, handleGlobalSetting }: Props) => {
                 id: 'uncontrolled-native3',
               }}
               onChange={handleLineChange}
-              style={{ flex: 1 }}
             >
               <option value={LINE_JOIN_TYPE.BEVEL}>bevel</option>
               <option value={LINE_JOIN_TYPE.ROUND}>round</option>

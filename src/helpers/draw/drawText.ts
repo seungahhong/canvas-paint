@@ -6,13 +6,13 @@ export const drawFillText = (
   x: number,
   y: number,
   scale: number,
-  props?: Property,
+  props: Property,
 ) => {
   props;
   ctx.save();
   ctx.textBaseline = 'top';
-  ctx.font = `${20 * scale}px Arial`;
-  ctx.fillStyle = '#ff0003';
+  ctx.font = `${40 * scale}px Arial`;
+  ctx.fillStyle = props.color;
   ctx.fillText(text, x * scale, y * scale);
   ctx.restore();
 };
@@ -23,13 +23,13 @@ export const drawStrokeText = (
   x: number,
   y: number,
   scale: number,
-  props?: Property,
+  props: Property,
 ) => {
   props;
   ctx.save();
   ctx.textBaseline = 'top';
-  ctx.font = `${20 * scale}px Arial`;
-  ctx.strokeStyle = '#ff0003';
+  ctx.font = `${40 * scale}px Arial`;
+  ctx.strokeStyle = props.color;
   ctx.strokeText(text, x * scale, y * scale);
   ctx.restore();
 };

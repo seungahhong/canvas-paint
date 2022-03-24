@@ -4,7 +4,7 @@ import CanvasView from './CanvasView';
 import { Meta } from '../types';
 
 const Section = styled.section({
-  backgroundColor: 'yellow',
+  backgroundColor: 'DarkSalmon',
   height: '100%',
 });
 
