@@ -23,6 +23,8 @@ export interface Property {
     baseline: CanvasTextBaseline;
     direction: CanvasDirection;
   };
+
+  image: HTMLImageElement;
 }
 
 export type ViewProps = {

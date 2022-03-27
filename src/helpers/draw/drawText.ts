@@ -28,9 +28,11 @@ export const drawText = (
 
   ctx.strokeStyle = 'red';
   const msText = ctx.measureText(text);
+  ctx.beginPath();
   ctx.moveTo(x - 10, cy);
   ctx.lineTo(x + msText.width + 10, cy);
   ctx.stroke();
+  ctx.closePath();
 
   ctx.restore();
 };

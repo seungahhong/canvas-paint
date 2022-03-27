@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import CanvasView from './view/CanvasView';
 import { Meta } from '../types';
@@ -36,14 +36,12 @@ const CanvasComponent = ({ meta, handleMouse }: Props) => {
 
   useEffect(() => {
     const { scale, datas } = meta;
-    setTimeout(() => {
-      if (canvasView.current) {
-        canvasView.current.clear();
-        canvasView.current.setScale(scale);
-        canvasView.current.draw(datas);
-      }
-    });
-  }, [meta, canvasView]);
+    if (canvasView.current) {
+      canvasView.current.clear();
+      canvasView.current.setScale(scale);
+      canvasView.current.draw(datas);
+    }
+  }, [meta]);
 
   return (
     <Section

@@ -1,12 +1,10 @@
 export const SHAPE_TYPE = {
-  NONE: 'NONE',
-  FILLTEXT: 'FILLTEXT',
-  STROKETEXT: 'STROKETEXT',
   RECT: 'RECT',
   TRIANGLE: 'TRIANGLE',
   CIRCLE: 'CIRCLE',
   LINE: 'LINE',
   TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
 };
 
 export const GLOBAL_MENU_TYPE = {
@@ -28,6 +26,7 @@ export const GLOBAL_MENU_TYPE = {
     BASELINE: 'BASELINE',
     DIRECTION: 'DIRECTION',
   },
+  IMAGE: 'IMAGE',
 };
 
 export const LINE_WIDTH_TYPE = {

@@ -13,6 +13,7 @@ const RootDispatcherEvents = ['resize', 'wheel'];
 
 const CanvasContainer = () => {
   const activeMouseFlag = useRef<boolean>(false);
+
   const [meta, setMeta] = useState<Meta>({
     scale: 1,
     globalState: {
@@ -32,6 +33,7 @@ const CanvasContainer = () => {
         baseline: 'alphabetic',
         direction: 'inherit',
       },
+      image: new Image(),
     },
     datas: [
       {
@@ -180,10 +182,7 @@ const CanvasContainer = () => {
     switch (event.type) {
       case 'mousedown':
         {
-          if (
-            activeMouseFlag.current ||
-            meta.globalState.type === SHAPE_TYPE.NONE
-          ) {
+          if (activeMouseFlag.current) {
             return;
           }
 
@@ -208,6 +207,7 @@ const CanvasContainer = () => {
                   text: {
                     ...meta.globalState.text,
                   },
+                  image: meta.globalState.image,
                 },
               },
             ],
@@ -217,10 +217,7 @@ const CanvasContainer = () => {
         break;
       case 'mouseup':
         {
-          if (
-            !activeMouseFlag.current ||
-            meta.globalState.type === SHAPE_TYPE.NONE
-          ) {
+          if (!activeMouseFlag.current) {
             return;
           }
 
@@ -244,6 +241,7 @@ const CanvasContainer = () => {
                     text: {
                       ...meta.globalState.text,
                     },
+                    image: meta.globalState.image,
                   },
                 };
               }
@@ -255,10 +253,7 @@ const CanvasContainer = () => {
         }
         break;
       case 'mousemove': {
-        if (
-          !activeMouseFlag.current ||
-          meta.globalState.type === SHAPE_TYPE.NONE
-        ) {
+        if (!activeMouseFlag.current) {
           return;
         }
 
@@ -281,6 +276,7 @@ const CanvasContainer = () => {
                   text: {
                     ...meta.globalState.text,
                   },
+                  image: meta.globalState.image,
                 },
               };
             }
@@ -504,6 +500,15 @@ const CanvasContainer = () => {
               ...prev.globalState.text,
               direction: value,
             },
+          },
+        }));
+        break;
+      case GLOBAL_MENU_TYPE.IMAGE:
+        setMeta((prev) => ({
+          ...prev,
+          globalState: {
+            ...prev.globalState,
+            image: value,
           },
         }));
         break;

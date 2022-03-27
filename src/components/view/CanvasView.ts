@@ -7,10 +7,10 @@ import {
   drawCircle,
 } from '../../helpers/draw/drawShape';
 import { drawText } from '../../helpers/draw/drawText';
+import { drawImage } from '../../helpers/draw/drawImage';
 
 class CanvasView {
   canvas: HTMLCanvasElement;
-
   ctx: CanvasRenderingContext2D | null;
   scale: number;
 
@@ -94,6 +94,14 @@ class CanvasView {
               const { x1, y1, props } = data;
               if (this.ctx) {
                 drawText(this.ctx, props.text.value, x1, y1, this.scale, props);
+              }
+            }
+            break;
+          case SHAPE_TYPE.IMAGE:
+            {
+              const { x1, y1, x2, y2, props } = data;
+              if (this.ctx) {
+                drawImage(this.ctx, x1, y1, x2, y2, this.scale, props);
               }
             }
             break;

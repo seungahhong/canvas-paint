@@ -15,6 +15,7 @@ import { ViewProps } from '../types';
 import { BoxWrapper, Container, Section } from './base/Common';
 import ShapeMenuComponent from './ShapeMenuComponent';
 import TextMenuComponent from './TextMenuComponent';
+import ImageMenuComponent from './ImageMenuComponent';
 
 const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
   const [shapeType, setShapeType] = useState<string>(meta.globalState.type);
@@ -58,6 +59,7 @@ const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
               <MenuItem value={SHAPE_TYPE.CIRCLE}>원</MenuItem>
               <MenuItem value={SHAPE_TYPE.LINE}>선</MenuItem>
               <MenuItem value={SHAPE_TYPE.TEXT}>텍스트</MenuItem>
+              <MenuItem value={SHAPE_TYPE.IMAGE}>이미지</MenuItem>
             </Select>
           </FormControl>
         </BoxWrapper>
@@ -89,6 +91,10 @@ const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
         handleGlobalSetting={handleGlobalSetting}
       />
       <TextMenuComponent
+        meta={meta}
+        handleGlobalSetting={handleGlobalSetting}
+      />
+      <ImageMenuComponent
         meta={meta}
         handleGlobalSetting={handleGlobalSetting}
       />
