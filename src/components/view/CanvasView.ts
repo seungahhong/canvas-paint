@@ -1,8 +1,12 @@
 import React from 'react';
-import { SHAPE_TYPE } from '../constants';
-import { drawLine } from '../helpers/draw/drawLine';
-import { drawRect, drawTriangle, drawCircle } from '../helpers/draw/drawShape';
-import { drawFillText, drawStrokeText } from '../helpers/draw/drawText';
+import { SHAPE_TYPE } from '../../constants';
+import { drawLine } from '../../helpers/draw/drawLine';
+import {
+  drawRect,
+  drawTriangle,
+  drawCircle,
+} from '../../helpers/draw/drawShape';
+import { drawText } from '../../helpers/draw/drawText';
 
 class CanvasView {
   canvas: HTMLCanvasElement;
@@ -43,24 +47,6 @@ class CanvasView {
     if (this.ctx) {
       datas.forEach((data: any) => {
         switch (data.type) {
-          case SHAPE_TYPE.FILLTEXT:
-            {
-              const { x1, y1, value, props } = data;
-              if (this.ctx) {
-                drawFillText(this.ctx, value, x1, y1, this.scale, props);
-              }
-            }
-            break;
-
-          case SHAPE_TYPE.STROKETEXT:
-            {
-              const { x1, y1, value, props } = data;
-              if (this.ctx) {
-                drawStrokeText(this.ctx, value, x1, y1, this.scale, props);
-              }
-            }
-            break;
-
           case SHAPE_TYPE.RECT:
             {
               const { x1, y1, x2, y2, props } = data;
@@ -100,6 +86,14 @@ class CanvasView {
               const { x1, y1, x2, y2, props } = data;
               if (this.ctx) {
                 drawLine(this.ctx, x1, y1, x2, y2, this.scale, props);
+              }
+            }
+            break;
+          case SHAPE_TYPE.TEXT:
+            {
+              const { x1, y1, props } = data;
+              if (this.ctx) {
+                drawText(this.ctx, props.text.value, x1, y1, this.scale, props);
               }
             }
             break;

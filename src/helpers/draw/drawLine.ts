@@ -22,12 +22,6 @@ export const drawLine = (
   ctx.lineJoin = props.line.join;
   ctx.strokeStyle = props.color;
   ctx.lineTo(cx2, cy2);
-
-  if (props.line.join === 'round') {
-    ctx.lineTo(cx2, cy1);
-    ctx.lineTo(cx1, cy2);
-  }
-
   ctx.stroke();
   ctx.closePath();
   ctx.restore();

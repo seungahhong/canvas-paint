@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import CanvasComponent from '../components/CanvasComponent';
 import MenuComponent from '../components/MenuComponent';
-import { SHAPE_TYPE, GLOBAL_MENU_TYPE, LINE_WIDTH_TYPE } from '../constants';
+import {
+  SHAPE_TYPE,
+  GLOBAL_MENU_TYPE,
+  LINE_WIDTH_TYPE,
+  MENU_HEIGHT,
+} from '../constants';
 import { Meta } from '../types';
 
 const RootDispatcherEvents = ['resize', 'wheel'];
@@ -11,15 +16,21 @@ const CanvasContainer = () => {
   const [meta, setMeta] = useState<Meta>({
     scale: 1,
     globalState: {
-      shape: {
-        type: SHAPE_TYPE.RECT,
-        outline: false,
-        color: '#000000',
-        line: {
-          width: LINE_WIDTH_TYPE.TWO_LINE_WIDTH,
-          cap: 'butt',
-          join: 'miter',
-        },
+      type: SHAPE_TYPE.RECT,
+      outline: false,
+      color: '#000000',
+      line: {
+        width: LINE_WIDTH_TYPE.TWO_LINE_WIDTH,
+        cap: 'butt',
+        join: 'miter',
+      },
+      text: {
+        value: 'hello',
+        size: 50,
+        name: 'Arial',
+        align: 'left',
+        baseline: 'alphabetic',
+        direction: 'inherit',
       },
     },
     datas: [
@@ -33,7 +44,10 @@ const CanvasContainer = () => {
           xdirection: 'forward',
           ydirection: 'forward',
         },
-        props: { outline: false, color: 'coral' },
+        props: {
+          outline: false,
+          color: 'coral',
+        },
       },
       {
         type: SHAPE_TYPE.CIRCLE,
@@ -45,7 +59,10 @@ const CanvasContainer = () => {
           xdirection: 'forward',
           ydirection: 'reverse',
         },
-        props: { outline: false, color: 'AliceBlue' },
+        props: {
+          outline: false,
+          color: 'AliceBlue',
+        },
       },
       {
         type: SHAPE_TYPE.CIRCLE,
@@ -84,18 +101,38 @@ const CanvasContainer = () => {
         props: { outline: false, color: 'DarkOrange' },
       },
       {
-        type: SHAPE_TYPE.FILLTEXT,
+        type: SHAPE_TYPE.TEXT,
         x1: window.innerWidth / 2 - 100,
-        y1: (window.innerHeight - 150) / 2,
-        value: 'FillText',
-        props: { outline: false, color: '#00BFFF' },
+        y1: (window.innerHeight - MENU_HEIGHT) / 2,
+        props: {
+          outline: false,
+          color: '#00BFFF',
+          text: {
+            value: 'FillText',
+            size: 40,
+            name: 'Arial',
+            align: 'left',
+            baseline: 'alphabetic',
+            direction: 'inherit',
+          },
+        },
       },
       {
-        type: SHAPE_TYPE.STROKETEXT,
+        type: SHAPE_TYPE.TEXT,
         x1: window.innerWidth / 2 + 100,
-        y1: (window.innerHeight - 150) / 2,
-        value: 'StrokeText',
-        props: { outline: false, color: '#2F4F4F' },
+        y1: (window.innerHeight - MENU_HEIGHT) / 2,
+        props: {
+          outline: true,
+          color: '#2F4F4F',
+          text: {
+            value: 'StrokeText',
+            size: 40,
+            name: 'Arial',
+            align: 'left',
+            baseline: 'alphabetic',
+            direction: 'inherit',
+          },
+        },
       },
     ],
   });
@@ -145,7 +182,7 @@ const CanvasContainer = () => {
         {
           if (
             activeMouseFlag.current ||
-            meta.globalState.shape.type === SHAPE_TYPE.NONE
+            meta.globalState.type === SHAPE_TYPE.NONE
           ) {
             return;
           }
@@ -155,18 +192,21 @@ const CanvasContainer = () => {
             datas: [
               ...prev.datas,
               {
-                type: prev.globalState.shape.type,
+                type: prev.globalState.type,
                 x1: event.clientX,
-                y1: event.clientY - 150,
+                y1: event.clientY - MENU_HEIGHT,
                 x2: event.clientX,
-                y2: event.clientY - 150,
+                y2: event.clientY - MENU_HEIGHT,
                 props: {
-                  outline: meta.globalState.shape.outline,
-                  color: meta.globalState.shape.color,
+                  outline: meta.globalState.outline,
+                  color: meta.globalState.color,
                   line: {
-                    width: meta.globalState.shape.line.width,
-                    cap: meta.globalState.shape.line.cap,
-                    join: meta.globalState.shape.line.join,
+                    width: meta.globalState.line.width,
+                    cap: meta.globalState.line.cap,
+                    join: meta.globalState.line.join,
+                  },
+                  text: {
+                    ...meta.globalState.text,
                   },
                 },
               },
@@ -179,7 +219,7 @@ const CanvasContainer = () => {
         {
           if (
             !activeMouseFlag.current ||
-            meta.globalState.shape.type === SHAPE_TYPE.NONE
+            meta.globalState.type === SHAPE_TYPE.NONE
           ) {
             return;
           }
@@ -192,14 +232,17 @@ const CanvasContainer = () => {
                 return {
                   ...data,
                   x2: event.clientX,
-                  y2: event.clientY - 150,
+                  y2: event.clientY - MENU_HEIGHT,
                   props: {
-                    outline: meta.globalState.shape.outline,
-                    color: meta.globalState.shape.color,
+                    outline: meta.globalState.outline,
+                    color: meta.globalState.color,
                     line: {
-                      width: meta.globalState.shape.line.width,
-                      cap: meta.globalState.shape.line.cap,
-                      join: meta.globalState.shape.line.join,
+                      width: meta.globalState.line.width,
+                      cap: meta.globalState.line.cap,
+                      join: meta.globalState.line.join,
+                    },
+                    text: {
+                      ...meta.globalState.text,
                     },
                   },
                 };
@@ -214,7 +257,7 @@ const CanvasContainer = () => {
       case 'mousemove': {
         if (
           !activeMouseFlag.current ||
-          meta.globalState.shape.type === SHAPE_TYPE.NONE
+          meta.globalState.type === SHAPE_TYPE.NONE
         ) {
           return;
         }
@@ -226,14 +269,17 @@ const CanvasContainer = () => {
               return {
                 ...data,
                 x2: event.clientX,
-                y2: event.clientY - 150,
+                y2: event.clientY - MENU_HEIGHT,
                 props: {
-                  outline: meta.globalState.shape.outline,
-                  color: meta.globalState.shape.color,
+                  outline: meta.globalState.outline,
+                  color: meta.globalState.color,
                   line: {
-                    width: meta.globalState.shape.line.width,
-                    cap: meta.globalState.shape.line.cap,
-                    join: meta.globalState.shape.line.join,
+                    width: meta.globalState.line.width,
+                    cap: meta.globalState.line.cap,
+                    join: meta.globalState.line.join,
+                  },
+                  text: {
+                    ...meta.globalState.text,
                   },
                 },
               };
@@ -267,7 +313,7 @@ const CanvasContainer = () => {
             data.animation.ydirection === 'reverse' && data.y1 < 0
               ? 'forward'
               : data.animation.ydirection === 'forward' &&
-                data.y2 > window.innerHeight - 150
+                data.y2 > window.innerHeight - MENU_HEIGHT
               ? 'reverse'
               : data.animation.ydirection;
           const y1 = ydirection === 'forward' ? data.y1 + time : data.y1 - time;
@@ -291,7 +337,7 @@ const CanvasContainer = () => {
             index === 5
               ? window.innerWidth / 2 - 300
               : window.innerWidth / 2 + 100;
-          const y1 = (window.innerHeight - 150) / 2;
+          const y1 = (window.innerHeight - MENU_HEIGHT) / 2;
           return {
             ...data,
             x1,
@@ -311,6 +357,7 @@ const CanvasContainer = () => {
         return data;
       }),
     }));
+
     requestAnimationFrame(animation);
   };
 
@@ -325,15 +372,12 @@ const CanvasContainer = () => {
 
   const handleGlobalSetting = (type: string, value: any) => {
     switch (type) {
-      case GLOBAL_MENU_TYPE.SHAPE.TYPE:
+      case GLOBAL_MENU_TYPE.TYPE:
         setMeta((prev) => ({
           ...prev,
           globalState: {
             ...prev.globalState,
-            shape: {
-              ...prev.globalState.shape,
-              type: value,
-            },
+            type: value,
           },
         }));
         break;
@@ -342,10 +386,7 @@ const CanvasContainer = () => {
           ...prev,
           globalState: {
             ...prev.globalState,
-            shape: {
-              ...prev.globalState.shape,
-              outline: value,
-            },
+            outline: value,
           },
         }));
         break;
@@ -354,10 +395,7 @@ const CanvasContainer = () => {
           ...prev,
           globalState: {
             ...prev.globalState,
-            shape: {
-              ...prev.globalState.shape,
-              color: value,
-            },
+            color: value,
           },
         }));
         break;
@@ -366,12 +404,9 @@ const CanvasContainer = () => {
           ...prev,
           globalState: {
             ...prev.globalState,
-            shape: {
-              ...prev.globalState.shape,
-              line: {
-                ...prev.globalState.shape.line,
-                width: value,
-              },
+            line: {
+              ...prev.globalState.line,
+              width: value,
             },
           },
         }));
@@ -381,12 +416,9 @@ const CanvasContainer = () => {
           ...prev,
           globalState: {
             ...prev.globalState,
-            shape: {
-              ...prev.globalState.shape,
-              line: {
-                ...prev.globalState.shape.line,
-                cap: value,
-              },
+            line: {
+              ...prev.globalState.line,
+              cap: value,
             },
           },
         }));
@@ -396,12 +428,81 @@ const CanvasContainer = () => {
           ...prev,
           globalState: {
             ...prev.globalState,
-            shape: {
-              ...prev.globalState.shape,
-              line: {
-                ...prev.globalState.shape.line,
-                join: value,
-              },
+            line: {
+              ...prev.globalState.line,
+              join: value,
+            },
+          },
+        }));
+        break;
+      case GLOBAL_MENU_TYPE.TEXT.VALUE:
+        setMeta((prev) => ({
+          ...prev,
+          globalState: {
+            ...prev.globalState,
+            text: {
+              ...prev.globalState.text,
+              value: value,
+            },
+          },
+        }));
+        break;
+      case GLOBAL_MENU_TYPE.TEXT.SIZE:
+        setMeta((prev) => ({
+          ...prev,
+          globalState: {
+            ...prev.globalState,
+            text: {
+              ...prev.globalState.text,
+              size: value,
+            },
+          },
+        }));
+        break;
+      case GLOBAL_MENU_TYPE.TEXT.NAME:
+        setMeta((prev) => ({
+          ...prev,
+          globalState: {
+            ...prev.globalState,
+            text: {
+              ...prev.globalState.text,
+              name: value,
+            },
+          },
+        }));
+        break;
+      case GLOBAL_MENU_TYPE.TEXT.ALIGN:
+        setMeta((prev) => ({
+          ...prev,
+          globalState: {
+            ...prev.globalState,
+            text: {
+              ...prev.globalState.text,
+              align: value,
+            },
+          },
+        }));
+        break;
+      case GLOBAL_MENU_TYPE.TEXT.BASELINE:
+        setMeta((prev) => ({
+          ...prev,
+          globalState: {
+            ...prev.globalState,
+            text: {
+              ...prev.globalState.text,
+              baseline: value,
+            },
+          },
+        }));
+        break;
+      case GLOBAL_MENU_TYPE.TEXT.DIRECTION:
+        setMeta((prev) => ({
+          ...prev,
+          globalState: {
+            ...prev.globalState,
+            text: {
+              ...prev.globalState.text,
+              direction: value,
             },
           },
         }));

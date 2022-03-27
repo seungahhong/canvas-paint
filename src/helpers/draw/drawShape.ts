@@ -19,6 +19,9 @@ export const drawRect = (
 
   if (props && props.outline === true) {
     ctx.strokeStyle = props.color;
+    ctx.lineWidth = props.line.width;
+    ctx.lineCap = props.line.cap;
+    ctx.lineJoin = props.line.join;
     ctx.strokeRect(cx, cy, cw, ch);
   } else {
     ctx.fillStyle = props.color;
@@ -54,6 +57,9 @@ export const drawTriangle = (
   ctx.lineTo(cx1, cy1);
   if (props && props.outline === true) {
     ctx.strokeStyle = props.color;
+    ctx.lineWidth = props.line.width;
+    ctx.lineCap = props.line.cap;
+    ctx.lineJoin = props.line.join;
     ctx.stroke();
   } else {
     ctx.fillStyle = props.color;
@@ -91,6 +97,9 @@ export const drawCircle = (
 
   if (props && props.outline === true) {
     ctx.strokeStyle = props.color;
+    ctx.lineWidth = props.line.width;
+    ctx.lineCap = props.line.cap;
+    ctx.lineJoin = props.line.join;
     ctx.stroke();
   } else {
     ctx.fillStyle = props.color;

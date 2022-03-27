@@ -6,11 +6,12 @@ export const SHAPE_TYPE = {
   TRIANGLE: 'TRIANGLE',
   CIRCLE: 'CIRCLE',
   LINE: 'LINE',
+  TEXT: 'TEXT',
 };
 
 export const GLOBAL_MENU_TYPE = {
+  TYPE: 'SHAPE',
   SHAPE: {
-    TYPE: 'SHAPE',
     OUTLINE: 'OUTLINE',
     COLOR: 'COLOR',
     LINE: {
@@ -18,6 +19,14 @@ export const GLOBAL_MENU_TYPE = {
       CAP: 'CAP',
       JOIN: 'JOIN',
     },
+  },
+  TEXT: {
+    VALUE: 'VALUE',
+    SIZE: 'SIZE',
+    NAME: 'NAME',
+    ALIGN: 'ALIGN',
+    BASELINE: 'BASELINE',
+    DIRECTION: 'DIRECTION',
   },
 };
 
@@ -40,3 +49,36 @@ export const LINE_JOIN_TYPE = {
   ROUND: 'round',
   MITER: 'miter',
 };
+
+export const TEXT_FONT = {
+  ARIAL: 'Arial',
+  VERDANA: 'Verdana',
+  HELVETICA: 'Helvetica',
+  TAHOMA: 'Tahoma',
+  TREBUCHET: 'Trebuchet MS',
+};
+
+export const TEXT_ALIGN = {
+  START: 'start',
+  END: 'end',
+  LEFT: 'left',
+  RIGHT: 'right',
+  CENTER: 'center',
+};
+
+export const TEXT_BASELINE = {
+  ALPHABETIC: 'alphabetic',
+  BOTTOM: 'bottom',
+  HANGING: 'hanging',
+  IDEOGRAPHIC: 'ideographic',
+  MIDDLE: 'middle',
+  TOP: 'top',
+};
+
+export const TEXT_DIRECTION = {
+  INHERIT: 'inherit',
+  LTR: 'ltr',
+  RTL: 'rtl',
+};
+
+export const MENU_HEIGHT = 150;

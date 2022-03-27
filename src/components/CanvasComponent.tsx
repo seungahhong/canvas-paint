@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
-import CanvasView from './CanvasView';
+import CanvasView from './view/CanvasView';
 import { Meta } from '../types';
 
 const Section = styled.section({

@@ -1,6 +1,6 @@
 import { Property } from '../../types';
 
-export const drawFillText = (
+export const drawText = (
   ctx: CanvasRenderingContext2D,
   text: string,
   x: number,
@@ -8,28 +8,29 @@ export const drawFillText = (
   scale: number,
   props: Property,
 ) => {
-  props;
-  ctx.save();
-  ctx.textBaseline = 'top';
-  ctx.font = `${40 * scale}px Arial`;
-  ctx.fillStyle = props.color;
-  ctx.fillText(text, x * scale, y * scale);
-  ctx.restore();
-};
+  const cx = x * scale;
+  const cy = y * scale;
 
-export const drawStrokeText = (
-  ctx: CanvasRenderingContext2D,
-  text: string,
-  x: number,
-  y: number,
-  scale: number,
-  props: Property,
-) => {
-  props;
   ctx.save();
-  ctx.textBaseline = 'top';
-  ctx.font = `${40 * scale}px Arial`;
-  ctx.strokeStyle = props.color;
-  ctx.strokeText(text, x * scale, y * scale);
+
+  ctx.textBaseline = props.text.baseline;
+  ctx.textAlign = props.text.align;
+  ctx.direction = props.text.direction;
+  ctx.font = `${props.text.size * scale}px ${props.text.name}`;
+
+  if (props && props.outline === true) {
+    ctx.strokeStyle = props.color;
+    ctx.strokeText(text, cx, cy);
+  } else {
+    ctx.fillStyle = props.color;
+    ctx.fillText(text, cx, cy);
+  }
+
+  ctx.strokeStyle = 'red';
+  const msText = ctx.measureText(text);
+  ctx.moveTo(x - 10, cy);
+  ctx.lineTo(x + msText.width + 10, cy);
+  ctx.stroke();
+
   ctx.restore();
 };
