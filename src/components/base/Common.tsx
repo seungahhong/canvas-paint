@@ -14,7 +14,7 @@ export const BoxWrapper = styled(Box)`
   display: flex;
   flex-direction: colume;
   align-items: center;
-  width: 200px;
+  width: ${(props) => (props.width ? `${props.width}` : '200px')};
   margin-bottom: 10px;
 
   span {

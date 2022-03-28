@@ -29,7 +29,7 @@ const ImageMenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
   return (
     <Container style={{ display: isVisible ? 'flex' : 'none' }}>
       <Section>
-        <BoxWrapper style={{ width: '500px' }}>
+        <BoxWrapper width="500px">
           <InputLabel
             variant="standard"
             htmlFor="uncontrolled-native1"
