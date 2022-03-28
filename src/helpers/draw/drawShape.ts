@@ -15,7 +15,6 @@ export const drawRect = (
   const ch = h * scale;
 
   ctx.save();
-  ctx.lineWidth = 0;
 
   if (props && props.outline === true) {
     ctx.strokeStyle = props.color;
@@ -24,7 +23,14 @@ export const drawRect = (
     ctx.lineJoin = props.line.join;
     ctx.strokeRect(cx, cy, cw, ch);
   } else {
-    ctx.fillStyle = props.color;
+    if (props && props.gradient) {
+      const gradient = ctx.createLinearGradient(cx, cy, cx + cw, cy + ch);
+      gradient.addColorStop(0, 'red');
+      gradient.addColorStop(1, 'white');
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = props.color;
+    }
     ctx.fillRect(cx, cy, cw, ch);
   }
 
@@ -62,7 +68,16 @@ export const drawTriangle = (
     ctx.lineJoin = props.line.join;
     ctx.stroke();
   } else {
-    ctx.fillStyle = props.color;
+    if (props && props.gradient) {
+      const gradient = ctx.createLinearGradient(cx1, cy1, cx3, cy3); // 4. 그라데이션 위치, 색상 추가
+      gradient.addColorStop(0, 'blue');
+      gradient.addColorStop(0.5, 'red');
+      gradient.addColorStop(1, 'green');
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = props.color;
+    }
+
     ctx.fill();
   }
 
@@ -102,7 +117,23 @@ export const drawCircle = (
     ctx.lineJoin = props.line.join;
     ctx.stroke();
   } else {
-    ctx.fillStyle = props.color;
+    if (props && props.gradient) {
+      const gradient = ctx.createRadialGradient(
+        cx1,
+        cy1,
+        Math.abs(cy2 - cy1) / 2,
+        cx2,
+        cy2,
+        Math.abs(cy2 - cy1) / 2,
+      );
+      gradient.addColorStop(0, 'pink');
+      gradient.addColorStop(0, 'red');
+      gradient.addColorStop(1, 'white');
+
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = props.color;
+    }
     ctx.fill();
   }
 

@@ -12,6 +12,7 @@ export const GLOBAL_MENU_TYPE = {
   SHAPE: {
     OUTLINE: 'OUTLINE',
     COLOR: 'COLOR',
+    GRADIENT: 'GRADIENT',
     LINE: {
       WIDTH: 'WIDTH',
       CAP: 'CAP',

@@ -8,6 +8,7 @@ export interface Property {
   type: string;
   outline: boolean;
   color: string;
+  gradient: boolean;
 
   line: {
     width: number;

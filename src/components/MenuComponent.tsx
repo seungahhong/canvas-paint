@@ -23,6 +23,9 @@ const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
   const [shapeOutlineSelected, setShapeOutlineSelected] = useState<boolean>(
     meta.globalState.outline,
   );
+  const [gradientSelected, setGradientSelected] = useState<boolean>(
+    meta.globalState.gradient,
+  );
 
   const handleShapeChange = (event: SelectChangeEvent<string>) => {
     setShapeType(event.target.value);
@@ -40,6 +43,11 @@ const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
       GLOBAL_MENU_TYPE.SHAPE.COLOR,
       color.css.backgroundColor,
     );
+  };
+
+  const handleGradientChange = () => {
+    setGradientSelected(!gradientSelected);
+    handleGlobalSetting(GLOBAL_MENU_TYPE.SHAPE.GRADIENT, !gradientSelected);
   };
 
   return (
@@ -83,6 +91,17 @@ const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
             value={shapeColor}
             onChange={handleColorChange}
           />
+        </BoxWrapper>
+        <BoxWrapper>
+          <span>Gradient</span>
+          <ToggleButton
+            value="check"
+            selected={gradientSelected}
+            style={{ height: '30px', width: '30px' }}
+            onChange={handleGradientChange}
+          >
+            <CheckIcon />
+          </ToggleButton>
         </BoxWrapper>
       </Section>
       <Divider orientation="vertical" flexItem />

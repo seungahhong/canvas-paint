@@ -20,6 +20,7 @@ const CanvasContainer = () => {
       type: SHAPE_TYPE.RECT,
       outline: false,
       color: '#000000',
+      gradient: false,
       line: {
         width: LINE_WIDTH_TYPE.TWO_LINE_WIDTH,
         cap: 'butt',
@@ -199,6 +200,7 @@ const CanvasContainer = () => {
                 props: {
                   outline: meta.globalState.outline,
                   color: meta.globalState.color,
+                  gradient: meta.globalState.gradient,
                   line: {
                     width: meta.globalState.line.width,
                     cap: meta.globalState.line.cap,
@@ -233,6 +235,7 @@ const CanvasContainer = () => {
                   props: {
                     outline: meta.globalState.outline,
                     color: meta.globalState.color,
+                    gradient: meta.globalState.gradient,
                     line: {
                       width: meta.globalState.line.width,
                       cap: meta.globalState.line.cap,
@@ -268,6 +271,7 @@ const CanvasContainer = () => {
                 props: {
                   outline: meta.globalState.outline,
                   color: meta.globalState.color,
+                  gradient: meta.globalState.gradient,
                   line: {
                     width: meta.globalState.line.width,
                     cap: meta.globalState.line.cap,
@@ -392,6 +396,15 @@ const CanvasContainer = () => {
           globalState: {
             ...prev.globalState,
             color: value,
+          },
+        }));
+        break;
+      case GLOBAL_MENU_TYPE.SHAPE.GRADIENT:
+        setMeta((prev) => ({
+          ...prev,
+          globalState: {
+            ...prev.globalState,
+            gradient: value,
           },
         }));
         break;
