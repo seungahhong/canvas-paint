@@ -16,6 +16,8 @@ import { BoxWrapper, Container, Section } from './base/Common';
 import ShapeMenuComponent from './ShapeMenuComponent';
 import TextMenuComponent from './TextMenuComponent';
 import ImageMenuComponent from './ImageMenuComponent';
+import { useAtom } from 'jotai';
+import { shapeLength } from '../states';
 
 const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
   const [shapeType, setShapeType] = useState<string>(meta.globalState.type);
@@ -26,6 +28,7 @@ const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
   const [gradientSelected, setGradientSelected] = useState<boolean>(
     meta.globalState.gradient,
   );
+  const [length] = useAtom(shapeLength);
 
   const handleShapeChange = (event: SelectChangeEvent<string>) => {
     setShapeType(event.target.value);
@@ -70,6 +73,9 @@ const MenuComponent = ({ meta, handleGlobalSetting }: ViewProps) => {
               <MenuItem value={SHAPE_TYPE.IMAGE}>이미지</MenuItem>
             </Select>
           </FormControl>
+        </BoxWrapper>
+        <BoxWrapper>
+          <p>렌더링 갯수: {length}</p>
         </BoxWrapper>
       </Section>
       <Section>
